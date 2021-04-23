@@ -10,9 +10,20 @@ using System.Windows.Forms;
 
 namespace RockerBrowseForms
 {
-    public partial class BrowseNav : UserControl
+    public partial class BrowseNavBarControl : UserControl
     {
-        public BrowseNav()
+        // 通过Parent父类查找的方式，找到BrowseTabPage容器
+        public BrowseTabPage TabPage {get => {
+            var parent = Parent;
+            while(parent != null){
+                if(parent is BrowseTabPage){
+                    return parent;
+                }
+                parent = Parent;
+            }
+        }}
+    
+        public BrowseNavBarControl()
         {
             InitializeComponent();
 
@@ -23,7 +34,17 @@ namespace RockerBrowseForms
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e); 
-            webBrowser.Load("http://www.baidu.com");
+            if(TabPage != null){
+                if(TabPage.Uri == null){
+                    webBrowser.load(BrowseTabPage.DefaultUri);
+                }
+                else{
+                    webBrowser.load(TabPage.Uri);
+                }
+            }
+            // else{
+            // webBrowser.Load("http://www.baidu.com");
+            // }
         }
 
         private void enterbtn_Click(object sender, EventArgs e)
@@ -32,7 +53,6 @@ namespace RockerBrowseForms
                 return;
 
             webBrowser.Load(uritxtbox.Text);
-                
         }
 
         private void backbtn_Click(object sender, EventArgs e)
