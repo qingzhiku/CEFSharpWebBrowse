@@ -9,16 +9,20 @@ using RockerBrowseForms;
 
 namespace BrowseForms
 {
-    // 包含
+    // 包含BrowseNavBarControl控件的TabPage
     public class BrowseTabPage : TabPage
     {
+        public Static Uri DefaultUri = "http://www.baidu.com";
         public Uri Uri { get; set; }
         public Image Icon { get; set; }
+        // 记录选项页下的BrowseNavBarControl
+        public BrowseNavBarControl BrowseNavBar {get;private set;}
 
         public BrowseTabPage()
         {
             BackColor = Color.White;
         }
+        
         public BrowseTabPage(string title) : base(title)
         {
             BackColor = Color.White;
@@ -46,15 +50,16 @@ namespace BrowseForms
               // panel.BackColor = tabcontrol.TabItemSelectedColor;
 
               //Controls.Add(panel);
-
-              BrowseNav nav = new BrowseNav();
-              nav.Dock = DockStyle.Fill;
-              // nav.Height = 40;
-              nav.BackColor = tabcontrol.TabItemSelectedColor;
+              if(BrowseNavBar == null){
+                  BrowseNavBarControl = new BrowseNavBarControl();
+                  Controls.Clear();
+              }
               
-              Padding = new Padding(0,0,9,0);
+              BrowseNavBar.Dock = DockStyle.Fill;
+              // bnav.Height = 40;
+              BrowseNavBar.BackColor = tabControl.TabItemSelectedColor;
 
-              Controls.Add(nav);
+              Controls.Add(BrowseNavBar);
             }
         }
 
