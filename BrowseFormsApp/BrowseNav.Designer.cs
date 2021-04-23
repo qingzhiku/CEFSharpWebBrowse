@@ -1,7 +1,7 @@
-﻿
+
 namespace RockerBrowseForms
 {
-    partial class BrowseNav
+    partial class BrowseNavBarControl
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -135,7 +135,7 @@ namespace RockerBrowseForms
             this.Controls.Add(this.forwardbtn);
             this.Controls.Add(this.backbtn);
             this.Controls.Add(this.uritxtbox);
-            this.Name = "BrowseNav";
+            this.Name = "BrowseNavBarControl";
             this.Size = new System.Drawing.Size(636, 330);
             this.ResumeLayout(false);
             this.PerformLayout();
