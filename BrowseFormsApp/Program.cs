@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,12 +15,17 @@ namespace BrowseForms
         [STAThread]
         static void Main()
         {
+            if (Environment.OSVersion.Version.Major >= 6)
+            SetProcessDPIAware();
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             AppDomain.CurrentDomain.AssemblyResolve += Resolver;
             Application.Run(new BrowseMainForm());
         }
+        
+        // 自动选择cef平台
         private static System.Reflection.Assembly Resolver(object sender, ResolveEventArgs args)
         {
             if (args.Name.StartsWith("CefSharp"))
@@ -35,5 +40,9 @@ namespace BrowseForms
             }
             return null;
         }
+        
+        // dpi适应
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern bool SetProcessDPIAware();
     }
 }
