@@ -14,6 +14,9 @@ namespace BrowseForms
     {
         public BrowseMainForm()
         {
+            MaximumSize = new Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
+            Size = new Size(Convert.ToInt32(MaximumSize.Width*0.8), Convert.ToInt32(MaximumSize.Height*0.8));
+            
             InitializeComponent();
 
             RockerBrowseForms.CEFBrowse.CEFHelper.InitializeChromium();
@@ -22,8 +25,6 @@ namespace BrowseForms
 
         protected override void OnLoad(EventArgs e)
         {
-            MaximumSize = new Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
-            Size = new Size(Convert.ToInt32(MaximumSize.Width*0.8), Convert.ToInt32(MaximumSize.Height*0.8));
             base.OnLoad(e);
         }
 
